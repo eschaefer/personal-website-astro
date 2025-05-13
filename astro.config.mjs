@@ -11,7 +11,6 @@ export default defineConfig({
   site: 'https://eric-schaefer.com',
   integrations: [mdx(), sitemap()],
   adapter: cloudflare(),
-
   vite: {
     plugins: [tailwindcss()],
   },
