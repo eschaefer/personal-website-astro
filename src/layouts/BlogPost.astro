@@ -4,18 +4,19 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import BaseBody from '../components/BaseBody.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en" data-theme="light">
+<html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 	</head>
 
-	<body class="min-h-screen flex flex-col bg-base-100 text-base-content">
+	<BaseBody>
 		<Header />
 		<main class="flex-grow container mx-auto px-4 py-8">
 			<article class="prose lg:prose-xl max-w-none">
@@ -40,5 +41,5 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			</article>
 		</main>
 		<Footer />
-	</body>
+	</BaseBody>
 </html>

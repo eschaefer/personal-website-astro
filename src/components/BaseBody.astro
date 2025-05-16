@@ -1,0 +1,12 @@
+---
+// Base for <body> element
+type Props = {
+  classNames?: string
+};
+
+const { classNames } = Astro.props;
+---
+
+<body class:list={['antialiased font-sans', classNames]}>
+  <slot />
+</body>

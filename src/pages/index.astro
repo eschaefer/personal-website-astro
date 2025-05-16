@@ -3,14 +3,15 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseBody from '../components/BaseBody.astro';
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="min-h-screen flex flex-col bg-base-100 text-base-content">
+	<BaseBody>
 		<Header />
 		<main class="flex-grow container mx-auto px-4 py-8">
 			<div class="hero min-h-[60vh] bg-base-200 rounded-lg">
@@ -55,5 +56,5 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			</div>
 		</main>
 		<Footer />
-	</body>
+	</BaseBody>
 </html>
