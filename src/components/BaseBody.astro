@@ -7,6 +7,6 @@ type Props = {
 const { classNames } = Astro.props;
 ---
 
-<body class:list={['antialiased font-sans', classNames]}>
+<body class:list={['antialiased font-sans flex flex-col min-h-screen', classNames]}>
   <slot />
 </body>

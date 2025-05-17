@@ -8,7 +8,7 @@ import BaseBody from '../components/BaseBody.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
 <html lang="en">
@@ -20,11 +20,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Header />
 		<main class="flex-grow container mx-auto px-4 py-8">
 			<article class="prose lg:prose-xl max-w-none">
-				{heroImage && (
-					<figure class="mb-8">
-						<img class="w-full h-auto rounded-lg shadow-lg" width={1020} height={510} src={heroImage} alt={`Hero image for ${title}`} />
-					</figure>
-				)}
 				<div class="text-center mb-8">
 					<h1 class="text-4xl font-bold mb-2">{title}</h1>
 					<div class="text-base-content/70">

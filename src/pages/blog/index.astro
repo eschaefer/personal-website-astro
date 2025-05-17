@@ -26,11 +26,6 @@ const posts = (await getCollection('blog')).sort(
 					posts.map((post) => (
 						<div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
 							<a href={`/blog/${post.id}/`} class="block">
-								{post.data.heroImage && (
-									<figure>
-										<img class="w-full h-48 object-cover" src={post.data.heroImage} alt={`Hero image for ${post.data.title}`} />
-									</figure>
-								)}
 								<div class="card-body">
 									<h2 class="card-title">{post.data.title}</h2>
 									<p class="text-base-content/70 text-sm">
