@@ -2,7 +2,7 @@
 title: 'Compiling dcraw to WebAssembly'
 tags: [webassembly, javascript, wasm]
 description: My first adventure into WebAssembly.
-pubDate: 'Jul 08 2012'
+pubDate: 'Jan 10 2020'
 ---
 
 At EyeEm we handle about every digital photo format you can imagine. And with the variety of digital cameras out there, some of our web-based tools must accept [RAW photo formats](https://en.wikipedia.org/wiki/Raw_image_format). Sometimes a JPG just won't make the cut.
