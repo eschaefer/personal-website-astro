@@ -1,8 +1,7 @@
 ---
 title: 'Repairing Shock Cord on Quarter Dome 2 Tent Poles'
 tags: [camping, outdoors]
-description: tst
-categories: blog
+description: Bringing an old tent pole assembly back to life.
 pubDate: 'Jul 08 2024'
 ---
 
