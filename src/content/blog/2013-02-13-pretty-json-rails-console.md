@@ -1,9 +1,9 @@
 ---
 categories: blog
-title: 'Prettify JSON data in the Rails console with pretty_generate'
+title: "Prettify JSON data in the Rails console with pretty_generate"
 tags: [Ruby, Rails, JSON]
 description: A nice way to format JSON in the Rails console.
-pubDate: 'Feb 13 2013'
+pubDate: "Feb 13 2013"
 ---
 
 Using the Rails console has been a big time-saver for me. I'm trying to minimize switching between my browser window and my development windows (terminals, Sublime Text), and a lot of the debugging that I once did through the browser can easily be moved into IRB.

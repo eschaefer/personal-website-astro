@@ -1,8 +1,8 @@
 ---
-title: 'Launched: SAND Journal'
+title: "Launched: SAND Journal"
 tags: [drupal]
 description: The official website for SAND Journal.
-pubDate: 'Dec 11 2012'
+pubDate: "Dec 11 2012"
 ---
 
 ![SAND Journal](/images/posts/sand-website.jpg)

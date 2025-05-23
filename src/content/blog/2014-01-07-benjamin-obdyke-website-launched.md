@@ -1,8 +1,8 @@
 ---
-title: 'Launched: Benjamin Obdyke'
+title: "Launched: Benjamin Obdyke"
 tags: [php, portfolio]
 description: The official website for Benjamin Obdyke.
-pubDate: 'Jan 07 2014'
+pubDate: "Jan 07 2014"
 ---
 
 <a href="http://www.benjaminobdyke.com">![Benjamin Obdyke's new home page](/images/posts/benjamin-obdyke-screenshot.jpg)</a>

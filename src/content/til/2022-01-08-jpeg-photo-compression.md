@@ -1,8 +1,8 @@
 ---
-title: 'Components of JPEG compression'
+title: "Components of JPEG compression"
 tags: [digital photos, compression, til]
 description: I did not know that.
-pubDate: 'Jan 08 2022'
+pubDate: "Jan 08 2022"
 ---
 
 JPEG compression begins with a general conversion of color information (R, G, B) about an image to its luminance (Y) and chrominance (Cb, Cr). This is also known as an afine transformation in color space.

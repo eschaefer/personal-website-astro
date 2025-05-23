@@ -2,7 +2,7 @@
 title: "Launched: Kofelgschroa's Band Website"
 tags: [drupal, portfolio]
 description: The official website for Kofelgschroa.
-pubDate: 'Apr 07 2013'
+pubDate: "Apr 07 2013"
 ---
 
 ![Kofelgschroa's front page](/images/posts/kofelgschroa-website.jpg)

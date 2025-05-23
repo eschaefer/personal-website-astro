@@ -1,8 +1,8 @@
 ---
-title: 'Console logging can lead to memory leaks'
+title: "Console logging can lead to memory leaks"
 tags: [javascript, til]
 description: Dangerous waters when logging objects in the console.
-pubDate: 'Jan 27 2022'
+pubDate: "Jan 27 2022"
 ---
 
 It's pretty typical to use `console.log` to debug problems in a UI. That is if you want to travel through time ([and not space](https://twitter.com/sophiebits/status/1481833292810924036)). However, if you log an object or array, this can quickly lead to memory leaks, especially in React apps where components can potentially re-render many times.

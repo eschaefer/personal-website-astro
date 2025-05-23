@@ -1,8 +1,8 @@
 ---
-title: 'Now Exhibiting in Berlin: PLAYING THE FIELD'
+title: "Now Exhibiting in Berlin: PLAYING THE FIELD"
 tags: [creative code, PureData]
 description: A PureData patch for audiovisual installations.
-pubDate: 'Jun 15 2013'
+pubDate: "Jun 15 2013"
 ---
 
 The audiovisual installation that I worked on with my friend Nick is now exhibiting in Berlin at the [Staycation Museum](http://staycationmuseum.com/exhibitions/playing-the-field/). Here's an excerpt from their website:

@@ -1,8 +1,8 @@
 ---
-title: 'Berlin Boombox launch and web store'
+title: "Berlin Boombox launch and web store"
 tags: [drupal, portfolio]
 description: The official website for the Berlin Boombox.
-pubDate: 'Nov 04 2012'
+pubDate: "Nov 04 2012"
 ---
 
 ![Berlin Boombox website](/images/posts/berlin-boombox.jpg)

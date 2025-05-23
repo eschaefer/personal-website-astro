@@ -1,8 +1,8 @@
 ---
-title: 'Setting Up Docker From Nothing'
+title: "Setting Up Docker From Nothing"
 tags: [docker, deployment]
 description: A quick walkthrough on how to set up Docker.
-pubDate: 'Jun 19 2015'
+pubDate: "Jun 19 2015"
 ---
 
 ![Docker](/images/posts/docker.png)

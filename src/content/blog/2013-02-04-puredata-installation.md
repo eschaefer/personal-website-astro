@@ -1,8 +1,8 @@
 ---
-title: 'Building an audiovisual installation using PD'
+title: "Building an audiovisual installation using PD"
 tags: [creative code, PureData]
 description: A PureData patch for audiovisual installations.
-pubDate: 'Feb 04 2013'
+pubDate: "Feb 04 2013"
 ---
 
 ![PD screenshot](/images/posts/pd-patch.png)

@@ -1,8 +1,8 @@
 ---
-title: 'How to Render jQuery Flot Charts through AngularJS'
+title: "How to Render jQuery Flot Charts through AngularJS"
 tags: [javascript, AngularJS, jQuery, deprecated]
 description: An archival take on how to render Flot charts through AngularJS. Long since deprecated.
-pubDate: 'Jul 26 2013'
+pubDate: "Jul 26 2013"
 ---
 
 There are lots of javascript data visualization and charting libries out there, but only a couple bother to minimize the IE8 compatability headache. [Flot Charts](http://www.flotcharts.org) seems to work nicely for my purposes on this particular project. I need bar charts and donut charts, both of which Flot handles well.
@@ -26,33 +26,33 @@ Here's some example DOM markup:
 Then the AngularJS:
 
 ```javascript
-var App = angular.module('App', []);
+var App = angular.module("App", []);
 
-App.controller('barChartController', function ($scope) {
+App.controller("barChartController", function ($scope) {
   var daftPoints = [[0, 4]],
     punkPoints = [[1, 20]];
 
   var data1 = [
     {
       data: daftPoints,
-      color: '#00b9d7',
+      color: "#00b9d7",
       bars: {
         show: true,
         barWidth: 1,
-        fillColor: '#00b9d7',
+        fillColor: "#00b9d7",
         order: 1,
-        align: 'center',
+        align: "center",
       },
     },
     {
       data: punkPoints,
-      color: '#3a4452',
+      color: "#3a4452",
       bars: {
         show: true,
         barWidth: 1,
-        fillColor: '#3a4452',
+        fillColor: "#3a4452",
         order: 2,
-        align: 'center',
+        align: "center",
       },
     },
   ];
@@ -60,22 +60,22 @@ App.controller('barChartController', function ($scope) {
   $scope.data = data1;
 });
 
-App.directive('chart', function () {
+App.directive("chart", function () {
   return {
-    restrict: 'E',
+    restrict: "E",
     link: function (scope, elem, attrs) {
       var chart = null,
         options = {
           xaxis: {
             ticks: [
-              [0, 'Daft'],
-              [1, 'Punk'],
+              [0, "Daft"],
+              [1, "Punk"],
             ],
           },
           grid: {
             labelMargin: 10,
-            backgroundColor: '#e2e6e9',
-            color: '#ffffff',
+            backgroundColor: "#e2e6e9",
+            color: "#ffffff",
             borderColor: null,
           },
         };
@@ -83,7 +83,7 @@ App.directive('chart', function () {
       var data = scope[attrs.ngModel];
 
       // If the data changes somehow, update it in the chart
-      scope.$watch('data', function (v) {
+      scope.$watch("data", function (v) {
         if (!chart) {
           chart = $.plot(elem, v, options);
           elem.show();
@@ -119,7 +119,7 @@ App.directive('chart', function () {
    <!--[if lte IE 8]>
      <script>
        // Declare custom directive names and load shiv for AngularJS in here. Or else IE8 bummertown.
-       window.myCustomTags = ['chart'];
+       window.myCustomTags = ["chart"];
      </script>
      <script src="js/ie-shiv.js"></script>
    <![endif]-->

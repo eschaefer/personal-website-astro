@@ -1,8 +1,8 @@
 ---
-title: 'Reducing Raspberry Pi SD card writes'
+title: "Reducing Raspberry Pi SD card writes"
 tags: [til]
 description: Don't kill your SD card.
-pubDate: 'Feb 24 2022'
+pubDate: "Feb 24 2022"
 ---
 
 Recently my Raspberry Pi's SD Card stopped working, most likely due to the high volume of read/write operations on it. I run a `pi-hole` which is constantly running in the background, and generates a lot of logs. Since these are written to disk, the integrity of the SD Card is known to wear down significatly.

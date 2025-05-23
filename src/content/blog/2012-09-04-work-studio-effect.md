@@ -1,8 +1,8 @@
 ---
-title: 'Work Studio in Effect'
+title: "Work Studio in Effect"
 tags: [blog]
 description: Getting settled in Neukölln.
-pubDate: 'Sep 04 2012'
+pubDate: "Sep 04 2012"
 ---
 
 ![Maximinimal work studio](/images/posts/home-office.JPG)

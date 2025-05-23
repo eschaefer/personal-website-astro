@@ -1,8 +1,8 @@
 ---
-title: 'Babel Plugin for React Components Made with Framer X'
+title: "Babel Plugin for React Components Made with Framer X"
 tags: [react, design, javascript, framer]
 description: Useful for converting Framer X components into production-ready components.
-pubDate: 'Oct 08 2018'
+pubDate: "Oct 08 2018"
 ---
 
 This weekend I published a Babel plugin that turns React components made with Framer X into production-ready components that you can directly use in Storybook, Styleguidist, Gatsby, or wherever.

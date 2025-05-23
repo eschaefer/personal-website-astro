@@ -1,8 +1,8 @@
 ---
-title: 'Launched: Bechstein Network'
+title: "Launched: Bechstein Network"
 tags: [php, wordpress, portfolio]
 description: The official website for Bechstein Network.
-pubDate: 'Apr 22 2014'
+pubDate: "Apr 22 2014"
 ---
 
 <a href="http://www.bechstein-network.com">![Bechstein Network](/images/posts/bechstein-network-screenshot.jpg)</a>

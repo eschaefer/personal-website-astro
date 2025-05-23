@@ -1,8 +1,8 @@
 ---
-title: 'Avoid a Headache: Precompiling Zurb (Foundation) on Heroku'
+title: "Avoid a Headache: Precompiling Zurb (Foundation) on Heroku"
 tags: [programming, rails]
 description: A quick fix for a common Heroku deployment problem.
-pubDate: 'Apr 24 2013'
+pubDate: "Apr 24 2013"
 ---
 
 It always happens. My pristine development environment is running my app just fine. Then I deploy it to Heroku and whomp, trouble abounds. Let's leave alone the fact that I'm using the zurb-foundation gem, and instead focus on the problem which has to be afflicting you as well if you're reading this.

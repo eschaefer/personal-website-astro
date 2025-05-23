@@ -1,8 +1,8 @@
 ---
-title: 'Import all modules in a directory with webpack'
+title: "Import all modules in a directory with webpack"
 tags: [til, javascript, webpack]
 description: Going deep on Webpack.
-pubDate: 'Jan 14 2022'
+pubDate: "Jan 14 2022"
 ---
 
 Today I needed to import any number of markdown files in a directory, and then render them in a list in a React app. If this was in a node.js environment, we could do this with `fs.readdir` and easily get the list of files and resolve them. However, this is not possible when running Javascript in the browser. So then how can I do this?
@@ -19,8 +19,8 @@ Here's what I came up with:
 async function importAll(r: __WebpackModuleApi.RequireContext) {
   const keys = r
     .keys()
-    .filter((key) => key.startsWith('./'))
-    .map((key) => key.replace('./', ''));
+    .filter((key) => key.startsWith("./"))
+    .map((key) => key.replace("./", ""));
 
   const importPromises = keys.map(async (key) => {
     return await import(`../../content/changelog/${key}`);
@@ -35,13 +35,13 @@ async function importAll(r: __WebpackModuleApi.RequireContext) {
 }
 
 const allChangelogs = require.context(
-  '../../content/changelog/',
+  "../../content/changelog/",
   false,
-  /\.md$/
+  /\.md$/,
 );
 
 importAll(allChangelogs).then((modules) => {
-  if (!modules) throw new Error('Missing changelogs');
+  if (!modules) throw new Error("Missing changelogs");
 
   // Do something with resolved modules...
 });

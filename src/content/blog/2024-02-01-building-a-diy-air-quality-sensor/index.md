@@ -1,8 +1,8 @@
 ---
-title: 'Building a DIY Air Quality Sensor'
-description: 'Getting some insight into the air quality in Berlin with a DIY sensor network.'
+title: "Building a DIY Air Quality Sensor"
+description: "Getting some insight into the air quality in Berlin with a DIY sensor network."
 tags: [DIY, hardware]
-pubDate: 'Feb 01 2024'
+pubDate: "Feb 01 2024"
 ---
 
 While attending this year's Chaos Communication Congress in Hamburg, I saw a pretty inspiring talk from two researchers in the field of numerical pollution modeling. They were combining data from all kinds of sources, including a DIY sensor network run by volunteers, to create models that can improve city planning, life quality, and ultimately address the problem of air pollution. I can really recommend watching the whole thing:

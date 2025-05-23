@@ -1,13 +1,13 @@
 ---
 // Base for <main> element
 type Props = {
-  classNames?: string
+  classNames?: string;
 };
 
 const { classNames } = Astro.props;
 ---
 
-<main class:list={['px-6 lg:px-8', classNames]}>
+<main class:list={["px-6 lg:px-8", classNames]}>
   <div class="flex-grow container mx-auto">
     <slot />
   </div>

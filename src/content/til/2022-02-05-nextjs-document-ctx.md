@@ -1,8 +1,8 @@
 ---
-title: 'Next.js: Unexpected missing ctx.req in _document'
+title: "Next.js: Unexpected missing ctx.req in _document"
 tags: [javascript, til]
 description: Why you not there?
-pubDate: 'Feb 05 2022'
+pubDate: "Feb 05 2022"
 ---
 
 This week I was trying to access the `ctx.req` property on a `_document`, but the value kept showing up as `undefined`. I tried the most basic example that [they showed in their docs](https://nextjs.org/docs/advanced-features/custom-document):

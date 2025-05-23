@@ -1,8 +1,8 @@
 ---
-title: 'Fixing the Raspberry Pi SSH server'
+title: "Fixing the Raspberry Pi SSH server"
 tags: [til, raspberry pi, linux]
 description: Ugh why won't this just work.
-pubDate: 'Jan 15 2022'
+pubDate: "Jan 15 2022"
 ---
 
 After enabling the SSH server on my Raspberry Pi, I was still unable to login remotely with the login and password I had set up. I kept seeing this message:

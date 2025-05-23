@@ -1,8 +1,8 @@
 ---
-title: 'Deploying a Rails Application to Dreamhost with Capistrano'
+title: "Deploying a Rails Application to Dreamhost with Capistrano"
 tags: [Rails, deployment, Git, tutorial, deprecated]
 description: Deploying a Rails app to Dreamhost with Capistrano.
-pubDate: 'Sep 26 2012'
+pubDate: "Sep 26 2012"
 ---
 
 I don't think there's a quick way to figure out your first "real" Rails deployment process. Sure there's Heroku (and now cloudControl, based here in Berlin) with magic one- or two-liner deployments. But they get expensive very quickly if you're running more than a dev server. Your file system also remains fixed after deployment, so you will end up storing your user assets in yet another cloud service. So for now I am relying on a cheap VPS from Dreamhost. A little more complex but also more flexible, and I'm learning a lot.

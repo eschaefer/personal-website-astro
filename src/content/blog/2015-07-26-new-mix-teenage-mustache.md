@@ -1,8 +1,8 @@
 ---
-title: 'Music and Noise Compilation: Teenage Mustache'
+title: "Music and Noise Compilation: Teenage Mustache"
 tags: [music, audio, mix]
 description: A compilation of ambient, noise, and new-wave music.
-pubDate: 'Jul 26 2015'
+pubDate: "Jul 26 2015"
 ---
 
 Figured it's not a terrible idea to share some of the music rumbling in the background of life. Lately I've been listening to a bunch of ambient, noise, German new-wave, and everything in between.

@@ -1,8 +1,8 @@
 ---
-title: 'How (Code) Language Creates Its Own Culture'
+title: "How (Code) Language Creates Its Own Culture"
 tags: [programming, ruby]
 description: How the culture around programming languages shapes the real-life projects we work on.
-pubDate: 'Apr 16 2013'
+pubDate: "Apr 16 2013"
 ---
 
 <a href="http://youtu.be/uMc4RnEmHLc?t=4m18s">![Google Hangout with ezeep](/images/posts/ezeep-code-culture-hangout.png)</a>

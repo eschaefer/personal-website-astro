@@ -1,8 +1,8 @@
 ---
-title: 'Launched: Openers'
+title: "Launched: Openers"
 tags: [php, wordpress, portfolio]
 description: The official website for Openers.
-pubDate: 'Jun 10 2014'
+pubDate: "Jun 10 2014"
 ---
 
 <a href="http://www.opnrs.com">![Openers](/images/posts/openers.jpg)</a>

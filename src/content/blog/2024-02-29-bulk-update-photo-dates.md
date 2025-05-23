@@ -1,8 +1,8 @@
 ---
-title: 'Bulk fixing photo and video dates'
+title: "Bulk fixing photo and video dates"
 tags: [blog, bash]
 description: A quick way to mass-update photo and video creation dates.
-pubDate: 'Feb 29 2024'
+pubDate: "Feb 29 2024"
 ---
 
 I have a lot of old digital photos with the correct date in the filename. But that date doesn't match anymore with the file creation date. This can pose a big problem for a some photo library software out there, which depends on file creation date to correctly organize the photos (looking at you Google Photos).

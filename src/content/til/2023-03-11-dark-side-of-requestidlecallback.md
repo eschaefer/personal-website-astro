@@ -1,8 +1,8 @@
 ---
-title: 'The Dark Side of requestIdleCallback'
+title: "The Dark Side of requestIdleCallback"
 tags: [javascript]
 description: It might not do what you think it does.
-pubDate: 'Mar 11 2023'
+pubDate: "Mar 11 2023"
 ---
 
 The `requestIdleCallback()` method in the DOM spec allows us to improve the performance of web applications by allowing us to de-prioritize some functions which could be run at a later time. But as with any tool available to optimize code execution, it comes with a dark side.

@@ -1,8 +1,8 @@
 ---
-title: 'How to Spoof a (Valid) Random MAC Address on Bootup'
+title: "How to Spoof a (Valid) Random MAC Address on Bootup"
 tags: [scripts, snippets]
 description: A quick and dirty way to spoof a random MAC address on bootup.
-pubDate: 'May 22 2014'
+pubDate: "May 22 2014"
 ---
 
 **Updated for Yosemite 10.10.4**

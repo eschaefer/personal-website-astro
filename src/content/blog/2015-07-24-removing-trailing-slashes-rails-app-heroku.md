@@ -1,8 +1,8 @@
 ---
-title: 'Removing Trailing Slashes from a Rails App on Heroku'
+title: "Removing Trailing Slashes from a Rails App on Heroku"
 tags: [rails, ruby, rack-redirect, deprecated]
 description: A quick way to remove trailing slashes from a Rails app on Heroku.
-pubDate: 'Jul 24 2015'
+pubDate: "Jul 24 2015"
 ---
 
 I need to redirect those terrible trailing URL slashes on a large project with thousands of articles. Turns out that trailing slash `==` duplicate content.

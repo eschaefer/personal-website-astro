@@ -1,8 +1,8 @@
 ---
-title: 'The quickest way to set-up live reload in Chrome'
+title: "The quickest way to set-up live reload in Chrome"
 tags: [front end, tools, deprecated]
 description: A quick walkthrough on how to set up live reload in Chrome.
-pubDate: 'Dec 14 2013'
+pubDate: "Dec 14 2013"
 ---
 
 Front-end development just got a little easier. Ever wanted to have like four browser windows next to each other, and have them automatically refresh when you've made an update to the project's javascript, CSS, or whatever?

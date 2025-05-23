@@ -1,8 +1,8 @@
 ---
-title: 'Repairing Shock Cord on Quarter Dome 2 Tent Poles'
+title: "Repairing Shock Cord on Quarter Dome 2 Tent Poles"
 tags: [camping, outdoors]
 description: Bringing an old tent pole assembly back to life.
-pubDate: 'Aug 5 2023'
+pubDate: "Aug 5 2023"
 ---
 
 Recently while camping I discovered that the elastic shock cord in my [REI Quarter Dome 2](https://www.rei.com/product/110819/rei-co-op-quarter-dome-2-tent) tent poles had become totally brittle and non-elastic, making it nearly impossible to keep all the poles together. This kind of thing happens when storing the tent in a warm place, or if the cord is wet before storing it for a long time.

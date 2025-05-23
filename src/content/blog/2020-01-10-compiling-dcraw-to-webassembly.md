@@ -1,8 +1,8 @@
 ---
-title: 'Compiling dcraw to WebAssembly'
+title: "Compiling dcraw to WebAssembly"
 tags: [webassembly, javascript, wasm]
 description: My first adventure into WebAssembly.
-pubDate: 'Jan 10 2020'
+pubDate: "Jan 10 2020"
 ---
 
 At EyeEm we handle about every digital photo format you can imagine. And with the variety of digital cameras out there, some of our web-based tools must accept [RAW photo formats](https://en.wikipedia.org/wiki/Raw_image_format). Sometimes a JPG just won't make the cut.
@@ -153,7 +153,7 @@ So we are calling `dcraw`, but it's pretty useless without any files or flags. L
 `Module.callMain()` can receive one array of arguments. The last one must always be a **reference** to a file buffer stored as a `Uint8Array`. All precending ones can be flags like `-e`, `-c`, etc. It will take some work to get us there, but it would look like
 
 ```javascript
-Module.callMain(['-e', 'raw_file_buffer']);
+Module.callMain(["-e", "raw_file_buffer"]);
 ```
 
 So how do we store a RAW file buffer as a `Uint8Array` in MEMFS, and then pass a reference to it?

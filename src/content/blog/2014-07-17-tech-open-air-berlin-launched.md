@@ -1,8 +1,8 @@
 ---
-title: 'Launched: Tech Open Air Berlin'
+title: "Launched: Tech Open Air Berlin"
 tags: [php, wordpress, portfolio]
 description: The official website for Tech Open Air Berlin.
-pubDate: 'Jul 17 2014'
+pubDate: "Jul 17 2014"
 ---
 
 <a href="http://toaberlin.com">![Tech Open Air Berlin](/images/posts/tech-open-air-berlin.jpg)</a>

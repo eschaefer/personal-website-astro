@@ -2,7 +2,7 @@
 title: "Launched: Filmcake's Website"
 tags: [wordpress, portfolio]
 description: Another Wordpress project.
-pubDate: 'Dec 09 2013'
+pubDate: "Dec 09 2013"
 ---
 
 <a href="http://about.filmcake.com">![Filmcake's about page](/images/posts/filmcake-done.jpg)</a>

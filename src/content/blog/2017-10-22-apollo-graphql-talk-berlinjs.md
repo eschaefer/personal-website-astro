@@ -1,8 +1,8 @@
 ---
-title: 'Apollo + GraphQL: A step toward more declarative UIs'
+title: "Apollo + GraphQL: A step toward more declarative UIs"
 tags: [react, apollo, graphql, javascript]
 description: A talk I gave at BerlinJS.
-pubDate: 'Oct 22 2017'
+pubDate: "Oct 22 2017"
 ---
 
 <div class="center-block">

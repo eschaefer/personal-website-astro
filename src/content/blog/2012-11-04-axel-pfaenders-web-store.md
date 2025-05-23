@@ -2,7 +2,7 @@
 title: "Also launched: Axel Pfaender's web store"
 tags: [Wordpress, portfolio]
 description: You wouldn't Wordpress.
-pubDate: 'Nov 04 2012'
+pubDate: "Nov 04 2012"
 ---
 
 ![Axel Pfaender's web store](/images/posts/axel-web-store.png)
