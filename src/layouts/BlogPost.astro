@@ -19,20 +19,18 @@ const { title, description, pubDate, updatedDate } = Astro.props;
   <BaseBody>
     <Header />
     <main>
-      <article class="prose lg:prose-xl max-w-none">
-        <div class="text-center mb-8">
-          <h1 class="text-4xl font-bold mb-2">{title}</h1>
-          <div class="text-base-content/70">
-            <FormattedDate date={pubDate} />
-            {
-              updatedDate && (
-                <span class="italic">
-                  {" "}
-                  (Last updated on <FormattedDate date={updatedDate} />)
-                </span>
-              )
-            }
-          </div>
+      <article class="prose lg:prose-lg max-w-none pt-10">
+        <h1 class="text-4xl font-bold mb-2">{title}</h1>
+        <div class="text-base-content/70">
+          <FormattedDate date={pubDate} />
+          {
+            updatedDate && (
+              <span class="italic">
+                {" "}
+                (Last updated on <FormattedDate date={updatedDate} />)
+              </span>
+            )
+          }
         </div>
         <div class="divider"></div>
         <div class="mt-8">
