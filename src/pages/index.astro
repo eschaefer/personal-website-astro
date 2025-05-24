@@ -4,9 +4,12 @@ import Header from "../components/Header.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import BaseBody from "../components/BaseBody.astro";
 import { getCollection } from "astro:content";
-import BaseMain from "../components/BaseMain.astro";
 
 const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const tilPosts = (await getCollection("til")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
@@ -18,7 +21,7 @@ const posts = (await getCollection("blog")).sort(
   </head>
   <BaseBody>
     <Header />
-    <BaseMain>
+    <main>
       <h1>
         Eric Schaefer
         <span class="font-normal text-3xl"
@@ -29,11 +32,11 @@ const posts = (await getCollection("blog")).sort(
       <div class="md:grid md:gap-4 md:grid-cols-2 mt-20">
         <div>
           <h2>Posts</h2>
-          <ul class="p-0 md:grid md:grid-cols-[max-content_1fr] md:gap-x-4">
+          <ul class="p-0 md:grid md:grid-cols-[max-content_1fr] md:gap-x-2">
             {
               posts.map((post) => (
                 <li class="contents list-none mb-2">
-                  <span class="text-sm text-gray-600 dark:text-gray-400 flex flex-col justify-center">
+                  <span class="text-sm text-secondary-content/70 flex flex-col justify-center">
                     {post.data.pubDate.toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "2-digit",
@@ -50,8 +53,26 @@ const posts = (await getCollection("blog")).sort(
         </div>
         <div>
           <h2>Today I Learned</h2>
+          <ul class="p-0 md:grid md:grid-cols-[max-content_1fr] md:gap-x-2">
+            {
+              tilPosts.map((post) => (
+                <li class="contents list-none mb-2">
+                  <span class="text-sm text-secondary-content/70 flex flex-col justify-center">
+                    {post.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "numeric",
+                    })}
+                  </span>
+                  <a class="md:truncate" href={`/til/${post.id}/`}>
+                    {post.data.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
-    </BaseMain>
+    </main>
   </BaseBody>
 </html>
