@@ -17,9 +17,7 @@ const { frontmatter } = Astro.props;
   <BaseBody>
     <Header />
     <main>
-      <article
-        class="prose lg:prose-lg prose-a:text-secondary-content max-w-none pt-10"
-      >
+      <article class="max-w-none pt-10">
         <h1>{frontmatter.title}</h1>
         <div class="mt-8">
           <slot />

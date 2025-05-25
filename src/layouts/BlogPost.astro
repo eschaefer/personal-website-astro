@@ -19,9 +19,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
   <BaseBody>
     <Header />
     <main>
-      <article
-        class="prose lg:prose-lg prose-a:text-secondary-content max-w-none pt-10"
-      >
+      <article class="max-w-none pt-10">
         <h1>{title}</h1>
         <div class="text-base-content/70">
           <FormattedDate date={pubDate} />
