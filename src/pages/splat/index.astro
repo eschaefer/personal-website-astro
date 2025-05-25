@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import BaseBody from '../../components/BaseBody.astro';
+import Header from '../../components/Header.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const title = '💦 Splat';
+const description = 'A collection of inpiration. Music, art, anything.';
+
+const posts = (await getCollection('splat')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const postsToRender = posts.map(async (post) => {
+  const { Content } = await render(post);
+  return { ...post, Content };
+});
+
+const renderedPosts = await Promise.all(postsToRender);
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <BaseBody>
+      <Header />
+      <main>
+        <article class="pt-10 prose-p:my-0">
+          <div class="pb-10">
+            <h1>{title}</h1>
+            <p>{description}</p>
+          </div>
+
+          <div class="grid gap-8">
+            {
+              renderedPosts.map((post) => (
+                <section>
+                  <FormattedDate date={post.data.pubDate} />
+                  <p class="font-bold">{post.data.title}</p>
+                  <post.Content />
+                </section>
+              ))
+            }
+          </div>
+        </article>
+      </main>
+    </BaseBody>
+  </body>
+</html>

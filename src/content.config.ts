@@ -29,4 +29,13 @@ const til = defineCollection({
   }),
 });
 
-export const collections = { blog, til };
+const splat = defineCollection({
+  loader: glob({ base: "./src/content/splat", pattern: "**/*.{md,mdx}" }),
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = { blog, til, splat };
