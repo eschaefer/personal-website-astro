@@ -11,7 +11,7 @@ Recently while camping I discovered that the elastic shock cord in my [REI Quart
 
 The tent pole assembly is a little unusual on the Quarter Dome 2. There is a central hub which routes all the cords to the different poles. I found this a little intimidating to try and repair the cords before making a proper diagram of how it all fits together. I could not find any existing guide online for this tent. I hope this helps anyone else out there who has this tent, but found the cable routing a little crazy. It's really not so bad when it's broken-down into its smaller parts. I have also color-coded how each of the 4 cord routes should run.
 
-### Tent pole assembly diagram for the REI Quarter Dome 2
+## Tent pole assembly diagram for the REI Quarter Dome 2
 
 _Click image to see zoomed-in detail view_
 

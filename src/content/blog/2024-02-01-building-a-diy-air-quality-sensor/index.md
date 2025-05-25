@@ -15,19 +15,19 @@ Here are all the pieces ready to be assembled on my living room floor:
 
 ![The kit pieces for DIY sensor.community](sensor-community-pieces.jpg)
 
-### The NodeMCU CPU/WLAN + BME280 temperature sensor
+## The NodeMCU CPU/WLAN + BME280 temperature sensor
 
 ![The NodeMCU CPU/WLAN](nodeMCU-cpu-wlan.jpg)
 
 This piece is responsible for powering the sensors, and communicating the collected data back to my WiFi router. Flashing the firmware for this was not possible with my Macbook Pro (M2, 2023). I used an old Linux laptop to do this instead, which was much more straightforward.
 
-### The SDS011 fine dust sensor
+## The SDS011 fine dust sensor
 
 ![The SDS011 fine dust sensor](sds011-fine-dust-sensor.jpg)
 
 A clear plastic tube is connected to the nozzle on this piece, and a small fan circulates air through the sensor.
 
-### Fully assembled kit fixed to my apartment window
+## Fully assembled kit fixed to my apartment window
 
 ![The assembled kit for sensor.community](sensor-community-kit-assembled.jpg)
 
@@ -35,11 +35,11 @@ The white pipe provides a little housing for the electronics inside. A 3m USB ca
 
 After a little bit of configuration, the device started wirelessly emitting data back to the sensor.community network!
 
-### Live data: fine dust, 10 µm
+## Live data: fine dust, 10 µm
 
 <iframe src="https://api-rrd.madavi.de:3000/grafana/d-solo/GUaL5aZMz/pm-sensors?orgId=1&var-chipID=esp8266-5627249&var-type=SDS011&var-query0=sensors&from=1706310000000&panelId=5" width="100%" style="aspect-ratio: 3/2;" frameborder="0"></iframe>
 
-### Live data: fine dust, 2.5 µm
+## Live data: fine dust, 2.5 µm
 
 <iframe src="https://api-rrd.madavi.de:3000/grafana/d-solo/GUaL5aZMz/pm-sensors?orgId=1&var-chipID=esp8266-5627249&var-type=SDS011&var-query0=sensors&from=1706310000000&panelId=13" width="100%" style="aspect-ratio: 3/2;" frameborder="0"></iframe>
 

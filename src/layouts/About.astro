@@ -1,0 +1,30 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import BaseBody from '../components/BaseBody.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead
+      title={frontmatter.title}
+      description="Work history and projects."
+    />
+  </head>
+
+  <BaseBody>
+    <Header />
+    <main>
+      <article
+        class="prose lg:prose-lg prose-a:text-secondary-content max-w-none pt-10"
+      >
+        <h1>{frontmatter.title}</h1>
+        <div class="mt-8">
+          <slot />
+        </div>
+      </article>
+    </main>
+  </BaseBody>
+</html>
