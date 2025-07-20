@@ -3,13 +3,13 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import BaseBody from '../components/BaseBody.astro';
-import { getCollection } from 'astro:content';
+import { getCollectionWithoutDrafts } from '../utils/collections';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollectionWithoutDrafts('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const tilPosts = (await getCollection('til')).sort(
+const tilPosts = (await getCollectionWithoutDrafts('til')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---

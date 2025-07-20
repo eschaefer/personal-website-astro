@@ -1,12 +1,12 @@
 import rss from "@astrojs/rss";
-import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import MarkdownIt from "markdown-it";
+import { getCollectionWithoutDrafts } from "../utils/collections";
 
 const parser = new MarkdownIt();
 
 export async function GET(context) {
-  const posts = await getCollection("blog");
+  const posts = await getCollectionWithoutDrafts("blog");
 
   return rss({
     title: SITE_TITLE,

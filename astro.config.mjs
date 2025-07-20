@@ -8,11 +8,10 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://eric-schaefer.com",
-  experimental: {
-    responsiveImages: true,
-  },
   image: {
     experimentalLayout: "constrained",
+    responsiveStyles: true,
+    experimentalDefaultStyles: true,
   },
   integrations: [mdx(), sitemap()],
   vite: {

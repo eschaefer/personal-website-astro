@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollectionWithoutDrafts } from '../../utils/collections';
 import { render } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import BaseBody from '../../components/BaseBody.astro';
@@ -9,7 +9,7 @@ import FormattedDate from '../../components/FormattedDate.astro';
 const title = '💦 Splat';
 const description = 'A collection of inpiration. Music, art, anything.';
 
-const posts = (await getCollection('splat')).sort(
+const posts = (await getCollectionWithoutDrafts('splat')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
