@@ -3,6 +3,7 @@
 ---
 
 <canvas id="sirens"></canvas>
+<canvas id="sirens-daily"></canvas>
 
 <script>
   import {
@@ -29,6 +30,27 @@
     });
   }
 
+  function aggregateDataByDay(data: ApiData) {
+    const dailyCounts = new Map<string, number>();
+
+    for (const item of data) {
+      const date = new Date(item.recorded_at * 1000);
+      const dateKey =
+        date.toISOString().split('T')[0] || date.toISOString().slice(0, 10); // YYYY-MM-DD format
+
+      dailyCounts.set(dateKey, (dailyCounts.get(dateKey) || 0) + 1);
+    }
+
+    // Convert to chart data format for bar chart
+    return Array.from(dailyCounts.entries()).map(([date, count]) => {
+      const dateObj = new Date(date);
+      return {
+        x: dateObj.getTime(),
+        y: count,
+      };
+    });
+  }
+
   async function fetchData() {
     const response = await fetch('https://www.deadhare.com/endpoint.php', {
       headers: {
@@ -46,40 +68,11 @@
     return data;
   }
 
-  document.addEventListener('DOMContentLoaded', async () => {
-    const ctx = document.getElementById('sirens') as HTMLCanvasElement;
-
-    if (!ctx) {
-      console.error('Could not find element with id "sirens"');
-      return;
-    }
-
-    // Detect color scheme preference
-    const isDarkMode = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-    const textColor = isDarkMode ? 'white' : 'black';
-
-    const apiData = await fetchData();
-    const transformedData = transformData(apiData);
-
-    const data: ChartData<'scatter'> = {
-      datasets: [
-        {
-          label: 'Siren Detections',
-          data: transformedData,
-          fill: false,
-          borderColor: 'rgb(255, 99, 132)',
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          pointBackgroundColor: 'rgb(255, 99, 132)',
-          pointBorderColor: isDarkMode ? '#fff' : '#000',
-          pointBorderWidth: 1,
-          pointRadius: 4,
-          tension: 0.1,
-        },
-      ],
-    };
-
+  function createScatterChart(
+    ctx: HTMLCanvasElement,
+    data: ChartData<'scatter'>,
+    textColor: string
+  ) {
     const config: ChartConfiguration = {
       type: 'scatter',
       data: data,
@@ -114,6 +107,7 @@
             },
             ticks: {
               color: textColor,
+              maxTicksLimit: 15, // Show approximately 50% of dates (assuming ~30 dates)
             },
           },
           y: {
@@ -121,9 +115,9 @@
             min: 0,
             max: 24,
             ticks: {
-              callback: function (value: any) {
-                const hours = Math.floor(value);
-                const minutes = Math.round((value - hours) * 60);
+              callback: function (value) {
+                const hours = Math.floor(Number(value));
+                const minutes = Math.round((Number(value) - hours) * 60);
                 return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
               },
               stepSize: 1, // Show every hour
@@ -140,6 +134,123 @@
       },
     };
 
-    new Chart(ctx, config);
+    return new Chart(ctx, config);
+  }
+
+  function createLineChart(
+    ctx: HTMLCanvasElement,
+    data: ChartData<'line'>,
+    textColor: string
+  ) {
+    const config: ChartConfiguration = {
+      type: 'line',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Siren Events per Day',
+            color: textColor,
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: textColor,
+            },
+          },
+        },
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'day',
+              displayFormats: {
+                day: 'MMM d',
+              },
+            },
+            title: {
+              display: true,
+              text: 'Date',
+              color: textColor,
+            },
+            ticks: {
+              color: textColor,
+              maxTicksLimit: 15, // Show approximately 50% of dates (assuming ~30 dates)
+            },
+          },
+          y: {
+            type: 'linear',
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Events',
+              color: textColor,
+            },
+            ticks: {
+              color: textColor,
+              stepSize: 1,
+            },
+          },
+        },
+      },
+    };
+
+    return new Chart(ctx, config);
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const scatterCtx = document.getElementById('sirens') as HTMLCanvasElement;
+    const barCtx = document.getElementById('sirens-daily') as HTMLCanvasElement;
+
+    if (!scatterCtx || !barCtx) {
+      console.error('Could not find canvas elements');
+      return;
+    }
+
+    // Detect color scheme preference
+    const isDarkMode = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+    const textColor = isDarkMode ? 'white' : 'black';
+
+    const apiData = await fetchData();
+    const transformedData = transformData(apiData);
+    const dailyData = aggregateDataByDay(apiData);
+
+    // Create scatter chart data
+    const scatterChartData: ChartData<'scatter'> = {
+      datasets: [
+        {
+          label: 'Siren Detections',
+          data: transformedData,
+          fill: false,
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          pointBackgroundColor: 'rgb(255, 99, 132)',
+          pointBorderColor: isDarkMode ? '#fff' : '#000',
+          pointBorderWidth: 1,
+          pointRadius: 2,
+          tension: 0.1,
+        },
+      ],
+    };
+
+    // Create bar chart data
+    const lineChartData: ChartData<'line'> = {
+      datasets: [
+        {
+          label: 'Events per Day',
+          data: dailyData,
+          backgroundColor: 'rgba(54, 162, 235, 0.8)',
+          borderColor: 'rgb(54, 162, 235)',
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    // Create both charts
+    createScatterChart(scatterCtx, scatterChartData, textColor);
+    createLineChart(barCtx, lineChartData, textColor);
   });
 </script>
