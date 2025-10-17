@@ -1,0 +1,312 @@
+---
+// Server-side code...
+---
+
+<canvas id="sirens"></canvas>
+<canvas id="sirens-daily"></canvas>
+
+<script>
+  import {
+    Chart,
+    type ChartConfiguration,
+    type ChartData,
+  } from "chart.js/auto";
+  import "chartjs-adapter-date-fns";
+  import data from "./data";
+
+  type RawDataPoint = {
+    id: number;
+    recorded_at: number; // unix timestamp
+  };
+  type ApiData = RawDataPoint[];
+
+  function transformData(data: ApiData) {
+    // August 26, 2025 at 11:59 PM Berlin time (Europe/Berlin)
+    // Note: Berlin is UTC+1 in summer (CEST) and UTC+2 in winter (CET)
+    // For August 26, 2025, Berlin will be in CEST (UTC+2)
+    const cutoffDate = new Date("2025-08-26T21:59:00Z"); // 11:59 PM Berlin time = 9:59 PM UTC
+
+    return data
+      .filter((item) => {
+        const date = new Date(item.recorded_at * 1000);
+        return date <= cutoffDate;
+      })
+      .map((item) => {
+        const date = new Date(item.recorded_at * 1000);
+
+        return {
+          x: date.getTime(),
+          y: date.getHours() + date.getMinutes() / 60, // Convert to decimal hours (e.g., 14.5 = 2:30 PM)
+          id: item.id, // Keep the original ID for matching with audio
+        };
+      });
+  }
+
+  function aggregateDataByDay(data: ApiData) {
+    // Apply the same Berlin timezone cutoff as transformData
+    const cutoffDate = new Date("2025-08-26T21:59:00Z"); // 11:59 PM Berlin time = 9:59 PM UTC
+
+    const dailyCounts = new Map<string, number>();
+
+    for (const item of data) {
+      const date = new Date(item.recorded_at * 1000);
+
+      // Apply the same cutoff filter as transformData
+      if (date <= cutoffDate) {
+        const dateKey =
+          date.toISOString().split("T")[0] || date.toISOString().slice(0, 10); // YYYY-MM-DD format
+
+        dailyCounts.set(dateKey, (dailyCounts.get(dateKey) || 0) + 1);
+      }
+    }
+
+    // Convert to chart data format for bar chart
+    return Array.from(dailyCounts.entries()).map(([date, count]) => {
+      const dateObj = new Date(date);
+      return {
+        x: dateObj.getTime(),
+        y: count,
+      };
+    });
+  }
+
+  function createScatterChart(
+    ctx: HTMLCanvasElement,
+    data: ChartData<"scatter">,
+    textColor: string,
+  ) {
+    const config: ChartConfiguration = {
+      type: "scatter",
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: "Siren Detection Events",
+            color: textColor,
+          },
+          legend: {
+            display: false,
+            labels: {
+              color: textColor,
+            },
+          },
+        },
+        scales: {
+          x: {
+            type: "time",
+            time: {
+              unit: "day",
+              displayFormats: {
+                day: "MMM d",
+              },
+            },
+            title: {
+              display: true,
+              text: "Date",
+              color: textColor,
+            },
+            ticks: {
+              color: textColor,
+              maxTicksLimit: 15, // Show approximately 50% of dates (assuming ~30 dates)
+            },
+          },
+          y: {
+            type: "linear",
+            min: 0,
+            max: 24,
+            ticks: {
+              callback: function (value) {
+                const hours = Math.floor(Number(value));
+                const minutes = Math.round((Number(value) - hours) * 60);
+                return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+              },
+              stepSize: 1, // Show every hour
+              maxTicksLimit: 25, // Limit to prevent overcrowding
+              color: textColor,
+            },
+            title: {
+              display: true,
+              text: "Time of Day",
+              color: textColor,
+            },
+          },
+        },
+      },
+    };
+
+    return new Chart(ctx, config);
+  }
+
+  function createLineChart(
+    ctx: HTMLCanvasElement,
+    data: ChartData<"line">,
+    textColor: string,
+  ) {
+    const config: ChartConfiguration = {
+      type: "line",
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: "Siren Events per Day",
+            color: textColor,
+          },
+          legend: {
+            display: false,
+            labels: {
+              color: textColor,
+            },
+          },
+        },
+        scales: {
+          x: {
+            type: "time",
+            time: {
+              unit: "day",
+              displayFormats: {
+                day: "MMM d",
+              },
+            },
+            title: {
+              display: true,
+              text: "Date",
+              color: textColor,
+            },
+            ticks: {
+              color: textColor,
+              maxTicksLimit: 15, // Show approximately 50% of dates (assuming ~30 dates)
+            },
+          },
+          y: {
+            type: "linear",
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "Number of Events",
+              color: textColor,
+            },
+            ticks: {
+              color: textColor,
+              stepSize: 1,
+            },
+          },
+        },
+      },
+    };
+
+    return new Chart(ctx, config);
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const scatterCtx = document.getElementById("sirens") as HTMLCanvasElement;
+    const barCtx = document.getElementById("sirens-daily") as HTMLCanvasElement;
+
+    if (!scatterCtx || !barCtx) {
+      console.error("Could not find canvas elements");
+      return;
+    }
+
+    // Detect color scheme preference
+    const isDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    const textColor = isDarkMode ? "white" : "black";
+    const transformedData = transformData(data);
+    const dailyData = aggregateDataByDay(data);
+
+    // Create scatter chart data with individual point styling
+    const scatterChartData: ChartData<"scatter"> = {
+      datasets: [
+        {
+          label: "Siren detection",
+          data: transformedData,
+          fill: false,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          pointBackgroundColor: transformedData.map(() => "rgb(255, 99, 132)"),
+          pointBorderColor: transformedData.map(() =>
+            isDarkMode ? "#fff" : "#000",
+          ),
+          pointBorderWidth: transformedData.map(() => 1),
+          pointRadius: transformedData.map(() => 2),
+          pointHoverRadius: transformedData.map(() => 4),
+          tension: 0.1,
+        },
+      ],
+    };
+
+    // Create bar chart data
+    const lineChartData: ChartData<"line"> = {
+      datasets: [
+        {
+          label: "Events per Day",
+          data: dailyData,
+          backgroundColor: "rgba(54, 162, 235, 0.8)",
+          borderColor: "rgb(54, 162, 235)",
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    // Create both charts
+    const scatterChart = createScatterChart(
+      scatterCtx,
+      scatterChartData,
+      textColor,
+    );
+    createLineChart(barCtx, lineChartData, textColor);
+
+    // Add audio event listeners for highlighting
+    document.addEventListener("audioPlay", ((event: CustomEvent) => {
+      const { dataPointId } = event.detail;
+      highlightDataPoint(scatterChart, dataPointId, true);
+    }) as EventListener);
+
+    document.addEventListener("audioPause", ((event: CustomEvent) => {
+      const { dataPointId } = event.detail;
+      highlightDataPoint(scatterChart, dataPointId, false);
+    }) as EventListener);
+
+    document.addEventListener("audioEnd", ((event: CustomEvent) => {
+      const { dataPointId } = event.detail;
+      highlightDataPoint(scatterChart, dataPointId, false);
+    }) as EventListener);
+
+    function highlightDataPoint(
+      chart: Chart,
+      dataPointId: number,
+      isHighlighted: boolean,
+    ) {
+      const dataset = chart.data.datasets[0];
+      if (!dataset) return;
+
+      const dataIndex = transformedData.findIndex(
+        (point) => point.id === dataPointId,
+      );
+
+      if (dataIndex !== -1) {
+        // Update the point radius and colors
+        const scatterDataset = dataset as any;
+        if (isHighlighted) {
+          scatterDataset.pointRadius[dataIndex] = 8;
+          scatterDataset.pointBackgroundColor[dataIndex] = "rgb(255, 215, 0)"; // Gold color
+          scatterDataset.pointBorderColor[dataIndex] = "rgb(255, 140, 0)"; // Orange border
+          scatterDataset.pointBorderWidth[dataIndex] = 3;
+        } else {
+          scatterDataset.pointRadius[dataIndex] = 2;
+          scatterDataset.pointBackgroundColor[dataIndex] = "rgb(255, 99, 132)";
+          scatterDataset.pointBorderColor[dataIndex] = isDarkMode
+            ? "#fff"
+            : "#000";
+          scatterDataset.pointBorderWidth[dataIndex] = 1;
+        }
+
+        chart.update("none"); // Update without animation for immediate effect
+      }
+    }
+  });
+</script>

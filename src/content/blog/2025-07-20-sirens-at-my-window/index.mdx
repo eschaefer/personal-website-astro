@@ -1,0 +1,59 @@
+---
+title: "Sirens at My Window: A Story Told with Data"
+description: "How I recorded and analyzed siren activity outside my window on a busy street in Berlin."
+tags: [DIY, open data]
+pubDate: "Sept. 10 2025"
+draft: true
+---
+import { Image } from 'astro:assets';
+import Chart from './chart.astro';
+import Audio from './audio.astro';
+import siren1 from './audio/siren_20250730_223059.wav';
+import siren2 from './audio/siren_20250805_203714.wav';
+import spectrogram1 from './images/siren_20250730_223059.jpg';
+import spectrogram2 from './images/siren_20250805_203714.jpg';
+
+
+## Outline
+
+- Introduction, why I did this.
+  - I'm sensitive to sound.
+  - Constant stream of sirens. Am I imagining it? What's the data saying?
+    - Ambulances are typically 130 dB(A)
+    - Police sirens are typically 120 dB(A)
+    - European standard DIN 14610 tells that they must be min 110 dB(A) in cities.
+    - Some samples of sirens from different countries https://www.hella.com/soe/en/News/Tone-sequence-of-the-RTK-audio-examples-4796/
+      - Probably reliable, Hella makes great headlights. I bought some replacement ones for my old VW Golf.
+  - Noise pollution. How much is it?
+    - Open Data from [Berlin](https://gdi.berlin.de/viewer/main/?MAPS={%22center%22:%5B390022.4138428097,5820501.803771703%5D,%22zoom%22:5}&LAYERS=%5B{%22id%22:%22hintergrund_default_grau%22,%22visibility%22:true,%22transparency%22:0},{%22id%22:%22ua_stratlaerm_2022:bb_strasse_gesamt_den2022%22,%22visibility%22:true,%22transparency%22:0},{%22id%22:%22ua_stratlaerm_2022:da_autobahn2022%22,%22visibility%22:true,%22transparency%22:0},{%22id%22:%22ua_stratlaerm_2022:db_bundesstrasse2022%22,%22visibility%22:true,%22transparency%22:0},{%22id%22:%22ua_stratlaerm_2022:dc_sonstigestr2022%22,%22visibility%22:true,%22transparency%22:0},{%22id%22:%22ua_stratlaerm_2022:df_laermschutzeinrichtung2022%22,%22visibility%22:true,%22transparency%22:0}%5D) 
+    - My 237 meter long section of Mehringdamm (data from 2019 unfortunately):
+      - Average noise level: 75 dB(A)
+      - 43140 vehicles pass by in a day.
+        - If I would stretch these bumper to bumper, each one averaging 4.5 meters long, that's 194 kilometers of cars.
+      - Cars: 34,880
+      - Trucks: > 3.5 t (excluding buses): 1,370
+      - Delivery vans: \<= 3.5 t: 5,520
+      - Public buses: 50
+      - Coaches: 120
+      - Motorcycles: 1,170
+      - 
+
+- Explain recording process
+  - TensorFlow
+  - Audio recordings, wavforms for later
+  - Save events to CSV
+- Show charts
+- What's interesting here?
+  - Data wise
+  - Spectrum wise
+  - Narrowing down which sirens are what? Fire/Police/Ambulance
+
+<Chart />
+
+<Audio path={siren1} title="Police siren sample" dataPointId={287} />
+
+<Image src={spectrogram1} alt="Spectrogram of police siren sample, showing the harmonics of the siren" />
+
+<Audio path={siren2} title="Ambulance siren sample" dataPointId={287} />
+
+<Image src={spectrogram2} alt="Spectrogram of ambulance siren sample, showing the harmonics of the siren" />
