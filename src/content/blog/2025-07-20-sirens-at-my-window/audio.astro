@@ -6,7 +6,7 @@ type Props = {
   autoplay?: boolean;
   loop?: boolean;
   muted?: boolean;
-  preload?: "none" | "metadata" | "auto";
+  preload?: 'none' | 'metadata' | 'auto';
   dataPointId?: number;
 };
 
@@ -15,9 +15,7 @@ const {
   title,
   controls = true,
   autoplay = false,
-  loop = false,
-  muted = false,
-  preload = "metadata",
+  preload = 'metadata',
   dataPointId,
 } = Astro.props;
 ---
@@ -27,57 +25,9 @@ const {
   title={title}
   controls={controls}
   autoplay={autoplay}
-  loop={loop}
-  muted={muted}
   preload={preload}
   class="w-full max-w-lg rounded-lg"
   data-point-id={dataPointId}
 >
   Your browser does not support the audio element.
 </audio>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const audioElements = document.querySelectorAll("audio[data-point-id]");
-
-    audioElements.forEach((audio) => {
-      if (audio instanceof HTMLAudioElement === false) {
-        console.error("Element is not an HTMLAudioElement");
-        return;
-      }
-
-      const dataPointId = audio.getAttribute("data-point-id");
-
-      if (!dataPointId) {
-        console.error("No data point id found for audio element");
-        return;
-      }
-
-      audio.volume = 1;
-
-      audio.addEventListener("play", () => {
-        // Emit custom event when audio starts playing
-        const event = new CustomEvent("audioPlay", {
-          detail: { dataPointId: parseInt(dataPointId) },
-        });
-        document.dispatchEvent(event);
-      });
-
-      audio.addEventListener("pause", () => {
-        // Emit custom event when audio is paused
-        const event = new CustomEvent("audioPause", {
-          detail: { dataPointId: parseInt(dataPointId) },
-        });
-        document.dispatchEvent(event);
-      });
-
-      audio.addEventListener("ended", () => {
-        // Emit custom event when audio ends
-        const event = new CustomEvent("audioEnd", {
-          detail: { dataPointId: parseInt(dataPointId) },
-        });
-        document.dispatchEvent(event);
-      });
-    });
-  });
-</script>
