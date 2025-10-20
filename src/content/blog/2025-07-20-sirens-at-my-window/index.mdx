@@ -2,8 +2,7 @@
 title: "How I Learned to Stop Worrying and Log the Noise"
 description: "How I recorded and analyzed siren activity outside my window on a busy street in Berlin."
 tags: [DIY, open data]
-pubDate: "Sept. 10 2025"
-draft: true
+pubDate: "Oct. 19 2025"
 ---
 import { Image } from 'astro:assets';
 import Chart from './chart.astro';
@@ -20,11 +19,11 @@ Berlin surprisingly has some open data on city noise. [My humble 237-meter secti
 
 ### The recording setup
 
-Not gonna pretend this was anything fancy. I used a spare linux laptop from the closet, and just laid it on living room window sill along with the plants. That's it. Not even a USB microphone. I cranked up the audio input to max, and then thought about how to record the audio and make sense of what comes in.
+Nothing fancy here. I used a spare linux laptop from the closet, and just laid it on living room window sill along with the plants. That's it. Not even a USB microphone. I cranked up the audio input to max, and then thought about how to record the audio and make sense of what comes in.
 
 ### Making sense of the recorded audio
 
-My first attempt to quantify siren events involved a Fast Fourier Transform (FFT). My thought was to isolate the dominant frequency range of sirens, which felt like a simple approach. SciPy, with its built-in FFT function, made bootstrapping this relatively easy. However, the FFT proved to be a bit too enthusiastic, generating a lot of false positives. Most notably, my baby daughter's crying repeatedly showed up in the siren detection, which, I admit, tugged at the heartstrings a little while combing through the recorded samples. Clearly, a more sophisticated approach was needed.
+My first attempt to quantify the sirens involved a Fast Fourier Transform (FFT). My thought was to isolate the dominant frequency range of sirens, which felt like a simple approach. SciPy, with its built-in FFT function, made bootstrapping this relatively easy. However, the FFT proved to be a bit too enthusiastic, generating a lot of false positives. My baby daughter's crying repeatedly showed up in the siren detection, which, I admit, tugged at the heartstrings a little while combing through the recorded samples. Clearly, a more sophisticated approach was needed.
 
 Enter TensorFlow.
 
@@ -144,4 +143,4 @@ Lower fundamental frequency here for ambulance sirens is interesting. I learned 
 
 ### Wrapping up
 
-This was a fun project, and I learned a lot about noise pollution and sirens. Also vibe-coded enough Python code to make it work. Would be cool to also auto-classify the sirens according to vehicle type, but that wasn't my original goal.
+This was a fun project, and I learned a lot about noise pollution and sirens. Also vibe-coded enough Python to make it work. Would be cool to also auto-classify the sirens according to vehicle type, but that wasn't my original goal.
