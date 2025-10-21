@@ -23,11 +23,11 @@ Nothing fancy here. I used a spare linux laptop from the closet, and just laid i
 
 ### Making sense of the recorded audio
 
-My first attempt to quantify the sirens involved a Fast Fourier Transform (FFT). My thought was to isolate the dominant frequency range of sirens, which felt like a simple approach. SciPy, with its built-in FFT function, made bootstrapping this relatively easy. However, the FFT proved to be a bit too enthusiastic, generating a lot of false positives. My baby daughter's crying repeatedly showed up in the siren detection, which, I admit, tugged at the heartstrings a little while combing through the recorded samples. Clearly, a more sophisticated approach was needed.
+My first attempt to quantify the sirens involved a Fast Fourier Transform. My thought was to isolate the dominant frequency range of sirens, which felt like a simple approach. The Python library SciPy has a built-in FFT function, made bootstrapping this relatively easy. But the FFT proved to be a bit too enthusiastic, generating a lot of false positives. My baby daughter's crying repeatedly showed up in the siren detection, which, I admit, tugged at the heartstrings a little while combing through the recorded samples. Clearly, a more sophisticated approach was needed.
 
 Enter TensorFlow.
 
-I stumbled upon an excellent tutorial in their documentation for [classifying audio](https://www.tensorflow.org/hub/tutorials/yamnet) using the YAMNet model. This model, conveniently enough, includes a subset of sirens in its training data. Perfect!
+I stumbled upon an excellent tutorial in their documentation for [classifying audio](https://www.tensorflow.org/hub/tutorials/yamnet) using the YAMNet model. This model conveniently includes a subset of sirens in its training data. Perfect!
 
 Processing a live stream turned out not to be possible with TensorFlow though. The solution? Record audio constantly in two-second chunks (enough to capture a full siren cycle), then feed those snippets to the YAMNet model. I also made sure to keep the raw audio recordings for any deeper analysis that might be required later. All detected siren events with timestamps were dutifully logged to a CSV for easy digestion.
 
