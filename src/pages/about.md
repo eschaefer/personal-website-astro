@@ -3,12 +3,16 @@ layout: "../layouts/About.astro"
 title: About Me
 ---
 
-I'm a **software engineer** with 12 years of experience developing apps and user interfaces for the web. I work across the full stack, and have always leaned toward product companies that build beautiful and stable software.
+I'm a **software engineer** with 14 years of experience developing apps and user interfaces for the web. I work across the full stack, and have always leaned toward product companies that build beautiful and stable software.
 
 I have a strong preference for statically typed languages like **TypeScript** and **ReScript**. My library of choice for building UIs is **React**, and I've built backends and **GraphQL** servers with **node.js**. I've set up **CI/CD** pipelines and managed deployments to **GCP** (on Kubernetes), **AWS**, **Vercel**, and others.
 
+My latest adventure is co-founding [TrackID](https://www.trackid.com), a free, private space for unreleased music.
+
+
 I've worked at:
 
+- [ProsiebenSat1/Joyn](https://www.joyn.de)
 - [Linear](https://linear.app)
 - [Amie](https://amie.so)
 - [EyeEm](https://www.eyeem.com)
