@@ -24,14 +24,20 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npm run build
-      - uses: burnett01/rsync-deployments@v8
+      # Native rsync/ssh avoids passing the key into the rsync-deployments Docker
+      # image (we were hitting "Error loading key (stdin): error in libcrypto" there).
+      - name: Deploy to server (rsync over SSH)
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-        with:
-          switches: -avz --delete
-          path: dist/
-          remote_path: ${{ secrets.DEPLOY_PATH }}
-          remote_host: ${{ secrets.DEPLOY_HOST }}
-          remote_user: ${{ secrets.DEPLOY_USER }}
-          remote_key: ${{ secrets.DEPLOY_KEY }}
         env:
-          ACTIONS_RUNNER_DEBUG: true
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          RSYNC_RSH='ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=accept-new'
+          rsync -avz --delete -e "$RSYNC_RSH" dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
