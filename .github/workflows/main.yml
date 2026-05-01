@@ -24,7 +24,8 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npm run build
-      - uses: burnett01/rsync-deployments@7.0.2
+      - uses: burnett01/rsync-deployments@v8
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         with:
           switches: -avz --delete
           path: dist/
