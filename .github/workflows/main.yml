@@ -26,18 +26,22 @@ jobs:
       - run: npm run build
       # Native rsync/ssh avoids passing the key into the rsync-deployments Docker
       # image (we were hitting "Error loading key (stdin): error in libcrypto" there).
+      # DEPLOY_KEY is locked server-side to rrsync (write-only) into the web root,
+      # so the remote path "/" is that web root.
       - name: Deploy to server (rsync over SSH)
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         env:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          # Pinned host key line for known_hosts (no trust-on-first-use)
+          KNOWN_HOST: ${{ secrets.DEPLOY_KNOWN_HOST }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          RSYNC_RSH='ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=accept-new'
-          rsync -avz --delete -e "$RSYNC_RSH" dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
+          printf '%s\n' "$KNOWN_HOST" > ~/.ssh/known_hosts
+          RSYNC_RSH='ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=yes'
+          rsync -rlptvz --delete --chmod=D2750,F640 --exclude=.DS_Store --exclude=.htaccess -e "$RSYNC_RSH" dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:/"
