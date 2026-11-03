@@ -1,5 +1,16 @@
-Deploy on [Cloudflare](https://docs.astro.build/en/guides/deploy/cloudflare/#how-to-deploy-with-cicd)
+# eric-schaefer.com
 
+Astro site. Pushing to `main` (or running the Deploy Site workflow manually) builds and deploys via GitHub Actions.
+
+## Local development
+
+```sh
+npm install
+npm run dev
 ```
-npm run deploy
+
+Build only:
+
+```sh
+npm run build
 ```
