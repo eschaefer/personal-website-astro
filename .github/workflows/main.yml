@@ -44,4 +44,4 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           printf '%s\n' "$KNOWN_HOST" > ~/.ssh/known_hosts
           RSYNC_RSH='ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=yes'
-          rsync -rlptvz --delete --chmod=D2750,F640 --exclude=.DS_Store --exclude=.htaccess -e "$RSYNC_RSH" dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:/"
+          rsync -rlptvz --delete --chmod=D2750,F640 --exclude=.DS_Store -e "$RSYNC_RSH" dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:/"
