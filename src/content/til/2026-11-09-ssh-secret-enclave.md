@@ -1,5 +1,5 @@
 ---
-title: "Stopping forwarding your SSH agent to remote machines"
+title: "Stop forwarding your SSH agent to remote machines"
 tags: [ai]
 description: ChatGPT can do what now?
 pubDate: "Nov 9 2026"
