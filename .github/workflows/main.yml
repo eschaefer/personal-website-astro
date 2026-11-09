@@ -28,6 +28,8 @@ jobs:
       # image (we were hitting "Error loading key (stdin): error in libcrypto" there).
       # DEPLOY_KEY is locked server-side to rrsync (write-only) into the web root,
       # so the remote path "/" is that web root.
+      # -g --groupmap=*:caddy: Caddy reads via the caddy group; without this, new
+      # dirs lose setgid (deploy user isn't root) and files end up unreadable → 404.
       - name: Deploy to server (rsync over SSH)
         if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         env:
@@ -44,4 +46,4 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           printf '%s\n' "$KNOWN_HOST" > ~/.ssh/known_hosts
           RSYNC_RSH='ssh -i ~/.ssh/deploy_key -o BatchMode=yes -o StrictHostKeyChecking=yes'
-          rsync -rlptvz --delete --chmod=D2750,F640 --exclude=.DS_Store -e "$RSYNC_RSH" dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:/"
+          rsync -rlptvz --delete --chmod=D2750,F640 -g --groupmap='*:caddy' --exclude=.DS_Store -e "$RSYNC_RSH" dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:/"
