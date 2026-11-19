@@ -19,17 +19,17 @@ Berlin has some open data on city noise. [My humble section of Mehringdamm](http
 
 ### The recording setup
 
-Nothing fancy here. I used a spare linux laptop from the closet, and just laid it on living room window sill along with the plants. That's it. Not even a USB microphone. I cranked up the audio input to max, and then thought about how to record the audio and make sense of what comes in.
+I kept the setup simple: a spare Linux laptop from the closet, laid on the living room window sill with the plants. No USB microphone. I cranked the built-in mic input to max, then figured out how to record and make sense of what came in.
 
 ### Making sense of the recorded audio
 
-My first attempt to quantify the sirens involved a Fast Fourier Transform. My thought was to isolate the main frequency range of sirens, which are predictable. The Python library SciPy has a built-in FFT function and made bootstrapping this relatively easy. But the FFT proved to be a bit too enthusiastic, generating a lot of false positives. My baby daughter's crying repeatedly showed up in the siren detection, which, I admit, tugged at my heartstrings a little while combing through the recorded samples. Clearly, a more sophisticated approach was needed.
+My first attempt to quantify the sirens involved a Fast Fourier Transform. My thought was to isolate the main frequency range of sirens, which are predictable. The Python library SciPy has a built-in FFT function and made bootstrapping this relatively easy. But the FFT proved to be a bit too enthusiastic, generating a lot of false positives. My baby daughter's crying repeatedly showed up in the siren detection, which, I admit, tugged at my heartstrings a little while combing through the recorded samples. FFT couldn't reliably tell a siren from my daughter crying, so I moved on to a classifier trained on real audio.
 
 ### TensorFlow
 
 I stumbled upon an excellent tutorial in TensorFlow's documentation for [classifying audio](https://www.tensorflow.org/hub/tutorials/yamnet) using the YAMNet model. This model conveniently includes a subset of sirens in its training data. Perfect!
 
-Processing a live stream turned out not to be possible with TensorFlow though. The solution? Record audio constantly in two-second chunks (enough to capture a full siren cycle), then feed those snippets to the YAMNet model. I also made sure to keep the raw audio recordings for any deeper analysis that might be required later. All detected siren events with timestamps were dutifully logged to a CSV for easy digestion.
+Processing a live stream turned out not to be possible with TensorFlow though. The solution? Record audio constantly in two-second chunks (enough to capture a full siren cycle), then feed those snippets to the YAMNet model. I saved the raw audio too, in case I wanted to dig in later. Every time YAMNet fired on a siren, I appended the timestamp and WAV filename to a CSV.
 
 Here's what I ended up with:
 
@@ -119,11 +119,11 @@ I let the model run for a month on my little linux laptop, and here's the result
 
 <Chart />
 
-At first glace, yeah, that's a lot of sirens. I'm not crazy! Also interesting that the number of siren events per day varies widely in the **beginning**, and then the curve kind of stabilizes toward the end. I guess that's just how convergence and increasing sample size works.
+At first glance, yeah, that's a lot of sirens. I'm not crazy! Also interesting that the number of siren events per day varies widely in the **beginning**, and then the curve kind of stabilizes toward the end. I guess that's just how convergence and increasing sample size works.
 
 The first day (July 26th) was also abnormally high, I think because it happened to be Christopher Street Day, a yearly pride parade in Berlin.
 
-### 👮‍♂️ Police siren
+### Police siren
 
 <Audio path={siren1} title="Police siren sample" dataPointId={287} />
 
@@ -133,7 +133,7 @@ Looking at this audio sample in [Audacity](https://www.audacityteam.org/) with t
 
 Notice how the harmonics are clean multiples of the fundamental frequency, just appearing a little weaker in the spectrum. Pretty cool!
 
-### 🚑 Ambulance siren
+### Ambulance siren
 
 <Audio path={siren2} title="Ambulance siren sample" dataPointId={287} />
 

@@ -1,6 +1,6 @@
 ---
 title: "The Dark Side of requestIdleCallback"
-tags: [javascript]
+tags: [javascript, til]
 description: It might not do what you think it does.
 pubDate: "Mar 11 2023"
 ---
